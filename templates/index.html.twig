@@ -1,117 +1,192 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block body %}
+  <div class="card card-body">
     <div class="row">
-        <div id="select" class="col-2">
-            <select class="form-select" name="type" id="type">
-                <option value="dirigeant" selected>DIRIGEANT</option>
-                <option value="societe">SOCIETE</option>
-            </select>
-        </div>
+      <div id="select" class="col-2">
+        <select class="form-select" name="type" id="type">
+          <option value="dirigeant">Dirigeant</option>
+          <option value="societe">Société</option>
+        </select>
+      </div>
 
-        <div id="societe" class="col-10" style="display: none">
-            <form action="POST">
-                <div class="form-group">
-                    <label for="nom-societe">Nom Société: </label>
-                    <input type="text" class="form-control" name="nom_societe" id="nom-societe">
-                </div>
+      <div id="societe" class="col-10 d-none">
+          <div class="form-group">
+            <label for="nom-societe">Nom Société: </label>
+            <input type="text" class="form-control" id="nom-societe">
+          </div>
 
-                <div class="form-group">
-                    <label for="description-societe">Description Société : </label>
-                    <textarea name="description_societe" class="form-control" id="description-societe" cols="30" rows="10"></textarea>
-                </div>
+          <div class="form-group">
+            <label for="description-societe">Description Société : </label>
+            <textarea class="form-control" id="description-societe" cols="30"
+                      rows="10"></textarea>
+          </div>
 
-                <div class="form-group">
-                    <label for="type-societe">Type Société : </label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sarl" value="sarl">
-                        <label class="form-check-label" for="sarl">SARL</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="eurl" value="eurl">
-                        <label class="form-check-label" for="eurl">EURL</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="selarl" value="selarl">
-                        <label class="form-check-label" for="selarl">SELARL</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sa" value="sa">
-                        <label class="form-check-label" for="sa">SA</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sas" value="sas">
-                        <label class="form-check-label" for="sas">SAS</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sasu" value="sasu">
-                        <label class="form-check-label" for="sasu">SASU</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="scp" value="scp">
-                        <label class="form-check-label" for="scp">SCP</label>
-                    </div>
-                </div>
+          <div class="form-group">
+            <label for="type-societe">Type Société : </label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="sarl" value="sarl">
+              <label class="form-check-label" for="sarl">SARL</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="eurl" value="eurl">
+              <label class="form-check-label" for="eurl">EURL</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="selarl" value="selarl">
+              <label class="form-check-label" for="selarl">SELARL</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="sa" value="sa">
+              <label class="form-check-label" for="sa">SA</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="sas" value="sas">
+              <label class="form-check-label" for="sas">SAS</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="sasu" value="sasu">
+              <label class="form-check-label" for="sasu">SASU</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input type-societe" type="checkbox" id="scp" value="scp">
+              <label class="form-check-label" for="scp">SCP</label>
+            </div>
+          </div>
 
-                <div class="form-group">
-                    <label for="code-postal">Code Postal : </label>
-                    <input type="text" name="code_postal" class="form-control" id="code-postal">
-                </div>
+          <div class="form-group">
+            <label for="code-postal">Code Postal : </label>
+            <input type="text" class="form-control" id="code-postal">
+          </div>
 
-                <div class="form-group">
-                    <label for="ville">Ville : </label>
-                    <input type="text" name="ville" class="form-control" id="ville">
-                </div>
+          <div class="form-group">
+            <label for="ville">Ville : </label>
+            <input type="text" class="form-control" id="ville">
+          </div>
 
-                <button type="submit" class="btn btn-primary">Ajouter Société</button>
-            </form>
-        </div>
+          <button type="button" class="btn btn-primary" id="add-societe">Ajouter Société</button>
+      </div>
 
-        <div id="dirigeant" class="col-10">
-            <form action="POST">
-                <div class="form-group">
-                    <label for="nom">Nom : </label>
-                    <input type="text" class="form-control" id="nom">
-                </div>
-                <div class="form-group">
-                    <label for="prenoms">Prénoms : </label>
-                    <input type="text" class="form-control" id="prenoms">
-                </div>
-                <div class="form-group">
-                    <label for="sexe">Sexe : </label>
-                    <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexe" id="homme" checked>
-                        <label class="form-check-label" for="homme">
-                            Homme
-                        </label>
-                    </div>
-                    <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexe" id="femme">
-                        <label class="form-check-label" for="femme">
-                            Femme
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter Dirigeant</button>
-            </form>
-        </div>
+      <div id="dirigeant" class="col-10">
+          <div class="form-group">
+            <label for="nom">Nom : </label>
+            <input type="text" class="form-control" id="nom">
+          </div>
+          <div class="form-group">
+            <label for="prenoms">Prénoms : </label>
+            <input type="text" class="form-control" id="prenoms">
+          </div>
+          <div class="form-group">
+            <label for="sexe">Sexe : </label>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="sexe" id="homme" value="homme" checked>
+              <label class="form-check-label" for="homme">
+                Homme
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="sexe" id="femme" value="femme">
+              <label class="form-check-label" for="femme">
+                Femme
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <button type="button" id="add-dirigeant" class="btn btn-primary">Ajouter Dirigeant</button>
+      </div>
     </div>
+  </div>
+  <div class="card card-body mt-2">
+    <div class="row">
+      <h4 class="text-center">Liste des dirigeants et sociétés</h4>
+    </div>
+    <div class="row mt-2">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Nom du dirigeant</th>
+          <th scope="col">Prénoms du dirigeant</th>
+          <th scope="col">E-Mail</th>
+          <th scope="col">Sexe</th>
+          <th scope="col">Nom de la société</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type</th>
+          <th scope="col">Code Postal</th>
+          <th scope="col">Ville</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        jQuery(document).ready(function ($) {
-            $('select[name="type"]#type').change(function () {
-                var value = $(this).val();
+  <script>
+      jQuery(document).ready(function ($) {
+          $('select[name="type"]#type').change(function () {
+              var typeSelect = $(this).val();
 
-                if (value === 'dirigeant') {
+              if (typeSelect === 'dirigeant') {
+                  if (typeSelect === 'dirigeant') {
+                      $('#dirigeant').show();
+                      $('#societe').hide();
+                  } else if (typeSelect === 'societe') {
+                      debugger;
+                      $('#dirigeant').hide();
+                      $('#societe').show();
+                  }
+              }
+          });
 
-                }
-            });
-        });
-    </script>
+
+          $('#add-dirigeant').click(function () {
+              var nom = $('#nom').val();
+              var prenoms = $('#prenoms').val();
+              var sexe = $('input[name="sexe"]:checked').val();
+              var email = $('#email').val();
+
+              $.ajax({
+                 type : 'POST',
+                 url : '/add_dirigeant',
+                 data : { nom, prenoms, sexe, email },
+                 success : function (donnees) {
+                     console.log(donnees);
+                 }
+              });
+          });
+
+          $('#add-societe').click(function () {
+              var nom_societe = $('#nom-societe').val();
+              var description = $('#description-societe').val();
+
+              var code_postal = $('#code-postal').val();
+              var ville = $('#ville').val();
+
+              $.ajax({
+                  type : 'POST',
+                  url : '/add_societe',
+                  data : { nom_societe, description, code_postal, ville },
+                  success : function (donnees) {
+                      console.log(donnees);
+                  }
+              })
+          });
+      });
+  </script>
 {% endblock %}

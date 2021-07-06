@@ -1,3 +1,13 @@
 index:
-    path: /
-    controller: App\Controller\IndexController::index
+  path: /
+  controller: App\Controller\IndexController::index
+
+add_dirigeant:
+  path: /add_dirigeant
+  controller: App\Controller\DirigeantController::addDirigeant
+  methods: POST|GET
+
+add_societe:
+  path: /add_societe
+  controller: App\Controller\SocieteController::addSociete
+  methods: POST|GET
