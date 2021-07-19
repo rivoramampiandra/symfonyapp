@@ -11,3 +11,8 @@ add_societe:
   path: /add_societe
   controller: App\Controller\SocieteController::addSociete
   methods: POST|GET
+
+get_dirigeant:
+  path: /get_dirigeant
+  controller: App\Controller\DirigeantController::getDirigeant
+  methods: POST|GET
